@@ -22,13 +22,32 @@ namespace MinecraftServerLauncher.Windows
     /// </summary>
     public partial class NewInstance : Window
     {
+        public Project ProjectType { get; set; }
+        public string Version { get; set; }
+        public string Build { get; set; }
+
         public NewInstance()
         {
             InitializeComponent();
             ComboBoxProject.Items.Add(Project.Paper);
             ComboBoxProject.Items.Add(Project.Waterfall);
             ComboBoxProject.Items.Add(Project.Travertine);
-            ComboBoxProject.SelectedItem = ComboBoxProject.Items[2];
+            ComboBoxProject.SelectedItem = ComboBoxProject.Items[0];
+            Build = "latest";
+        }
+
+
+        private void ComboBoxProject_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxVersions.Items.Clear();
+
+            PopulateVersion();
+
+
+            if (CheckBoxManual.IsChecked == true)
+            {
+                PopulateBuilds();
+            }
         }
 
         private void NewInstance_OnClosing(object sender, CancelEventArgs e)
@@ -37,39 +56,62 @@ namespace MinecraftServerLauncher.Windows
             Visibility = Visibility.Hidden;
         }
 
-        private void ComboBoxProject_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxVersions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxVersions.Items.Clear();
-            foreach (var stringVersion in Projects.GetVersions((Project)ComboBoxProject.SelectedItem))
-            {
-                ComboBoxVersions.Items.Add(stringVersion);
-            }
-
-            if (ComboBoxVersions.Items.Count > 0)
-            {
-                ComboBoxVersions.SelectedItem = ComboBoxVersions.Items[0];
-            }
-
             if (CheckBoxManual.IsChecked == true)
             {
-                CheckBoxIsLatest_OnChecked(null, null);
+                PopulateBuilds();
             }
         }
 
         private void CheckBoxIsLatest_OnChecked(object sender, RoutedEventArgs e)
         {
+            if (CheckBoxManual.IsChecked == true)
+            {
+                PopulateBuilds();
+            }
+        }
+
+        private void ButtonCreateServer_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO implement checking if version is downloaded
+            if (CheckBoxManual.IsChecked == false)
+            {
+                Build = "latest";
+            }
+            Projects.DownloadJar(ProjectType, Version, Build);
+            Debug.WriteLine($"{ProjectType}-{Version}_{Build}");
+        }
+
+        private void PopulateVersion()
+        {
+            ProjectType = (Project) ComboBoxProject.SelectedItem;
+            foreach (var stringVersion in Projects.GetVersions(ProjectType))
+            {
+                ComboBoxVersions.Items.Add(stringVersion);
+            }
+
+            Version = ComboBoxVersions.Items[0].ToString();
+            ComboBoxVersions.SelectedItem = ComboBoxVersions.Items[0];
+        }
+
+        private void PopulateBuilds()
+        {
             ComboBoxBuilds.Items.Clear();
-            string[] builds = Projects.GetBuild((Project) ComboBoxProject.SelectedItem, ComboBoxVersions.Text);
+            Version = ComboBoxVersions.Text;
+            string[] builds = Projects.GetBuild(ProjectType, Version);
             if (builds == null)
             {
                 ComboBoxBuilds.Items.Add("No builds found");
                 return;
             }
+
             foreach (var build in builds)
             {
                 ComboBoxBuilds.Items.Add(build);
             }
 
+            Build = ComboBoxBuilds.Items[0].ToString();
             ComboBoxBuilds.SelectedItem = ComboBoxBuilds.Items[0];
         }
     }

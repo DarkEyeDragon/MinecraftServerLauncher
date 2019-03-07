@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MinecraftServerLauncher.Servers.Versions
 {
-    enum Project
+    public enum Project
     {
         Paper,
         Waterfall,
@@ -72,14 +73,14 @@ namespace MinecraftServerLauncher.Servers.Versions
             using (WebClient wc = new WebClient())
             {
                 wc.DownloadFileAsync(new Uri($"{_baseUrl}{project.ToString().ToLower()}/{version}/{build}/download"),
-                    $"{project}-{version}_{build}");
+                    $"{project}-{version}_{build}.jar");
                 wc.DownloadProgressChanged += DownloadProgressChanged;
             }
         }
 
         private static void DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            
+            Debug.WriteLine($"{e.BytesReceived}/{e.TotalBytesToReceive}");
         }
     }
 }
