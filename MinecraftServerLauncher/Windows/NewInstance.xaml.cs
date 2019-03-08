@@ -13,7 +13,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MinecraftServerLauncher.ServerInterface;
 using MinecraftServerLauncher.Servers.Versions;
+using MinecraftServerLauncher.Settings;
 
 namespace MinecraftServerLauncher.Windows
 {
@@ -36,13 +38,6 @@ namespace MinecraftServerLauncher.Windows
             ComboBoxProject.Items.Add(Project.Travertine);
             ComboBoxProject.SelectedItem = ComboBoxProject.Items[0];
             Build = "latest";
-            _worker.DoWork += Worker_DoWork;
-            //_worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-        }
-
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
 
@@ -53,7 +48,7 @@ namespace MinecraftServerLauncher.Windows
             PopulateVersion();
 
 
-            if (CheckBoxManual.IsChecked == true)
+            if (CheckBoxManual.IsVisible && CheckBoxManual.IsChecked == true)
             {
                 PopulateBuilds();
             }
@@ -91,7 +86,17 @@ namespace MinecraftServerLauncher.Windows
 
             Projects.DownloadChangeEvent += UpdateDownload;
             Projects.DownloadCompleted += DownloadCompleted;
-            Projects.DownloadJar(ProjectType, Version, Build);
+            //Projects.DownloadJar(ProjectType, Version, Build);
+
+            //TODO implement a path system
+            var args = new Arguments();
+            args.Add("xmx", "1024M");
+            args.Add("xms", "1024M");
+            ServerElement element = new ServerElement(ProjectType, TextBoxServerName.Text, Version, Build, "", $"{ProjectType}-{Version}_{Build}", args);
+
+            var settings = new SettingsHandler();
+            settings.Save(element);
+
             Debug.WriteLine($"{ProjectType}-{Version}_{Build}");
         }
 
@@ -99,6 +104,13 @@ namespace MinecraftServerLauncher.Windows
         {
             Projects.DownloadChangeEvent -= UpdateDownload;
             Projects.DownloadCompleted -= DownloadCompleted;
+            var result = MessageBox.Show("Do you want to start the server now?", "Start server",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            ProgressBarDownload.Value = 0;
+            if (result == MessageBoxResult.Yes)
+            {
+                //TODO launch server
+            }
         }
 
         private void UpdateDownload(int progress)

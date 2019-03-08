@@ -62,6 +62,8 @@
     <Compile Include="ServerInterface\IServer.cs" />
     <Compile Include="Servers\MinecraftServer.cs" />
     <Compile Include="Servers\Versions\Projects.cs" />
+    <Compile Include="Settings\ServerElement.cs" />
+    <Compile Include="Settings\SettingsHandler.cs" />
     <Compile Include="Windows\NewInstance.xaml.cs">
       <DependentUpon>NewInstance.xaml</DependentUpon>
     </Compile>
@@ -123,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\button_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Settings.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

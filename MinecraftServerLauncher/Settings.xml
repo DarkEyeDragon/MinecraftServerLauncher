@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Servers>
+  <Server>
+    <Name>Server 1</Name>
+    <ServerType>Paper</ServerType>
+    <Version>1.13.2</Version>
+    <Location Path="C:\Users\User\Documents\Servers\Server1" />
+    <Jar Name="Paper-1.13.2_754"/>
+    <Arguments>
+      <Argument Key="xmx" Value="2048"></Argument>
+      <Argument Key="xms" Value="2048"></Argument>
+    </Arguments>
+  </Server>
+  <Server>
+    <Name>Server 2</Name>
+    <ServerType>Waterfall</ServerType>
+    <Version>1.13</Version>
+    <Location Path="C:\Users\User\Documents\Servers\Hub" />
+    <Jar Name="Waterfall-1.13_52"/>
+    <Arguments>
+      <Argument Key="xmx" Value="1024"></Argument>
+      <Argument Key="xms" Value="1024"></Argument>
+    </Arguments>
+  </Server>
+</Servers>
