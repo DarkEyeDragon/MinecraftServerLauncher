@@ -8,31 +8,61 @@
         Title="NewInstance" Height="450" Width="800"
         Closing="NewInstance_OnClosing">
     <Grid>
-        <StackPanel Name="StackPanelVersionControl" Margin="369,135,303,202">
-            <ComboBox Name="ComboBoxBuilds">
-                <ComboBox.Style>
-                    <Style TargetType="ComboBox">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=CheckBoxManual}"
-                                         Value="True">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=CheckBoxManual}"
-                                         Value="False">
-                                <Setter Property="Visibility" Value="Hidden"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ComboBox.Style>
-            </ComboBox>
-        </StackPanel>
-        <ComboBox Name="ComboBoxVersions" HorizontalAlignment="Left" Margin="369,66,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxVersions_SelectionChanged"/>
-        <ComboBox Name="ComboBoxProject" HorizontalAlignment="Left" Margin="229,65,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxProject_SelectionChanged"/>
-        <Label Content="Server name" HorizontalAlignment="Left" Margin="4,61,0,327" VerticalAlignment="Center" Height="31"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="89,65,0,0" TextWrapping="Wrap" Text="Server1" VerticalAlignment="Top" Width="120"/>
+        <Grid Style="{StaticResource GridContainer}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85" />
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="206" />
+                <ColumnDefinition Width="227" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="87*" MaxHeight="100" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="150*" MaxHeight="150" />
+                <RowDefinition Height="80*" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Content="Server name"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Margin="3" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="Server1"/>
+            <CheckBox Grid.Column="2" Grid.Row="1" Margin="3,0,0,0" Name="CheckBoxManual" IsChecked="False" Content="Manual build" VerticalContentAlignment="Center" HorizontalAlignment="Left" Checked="CheckBoxIsLatest_OnChecked" Width="89"/>
+            <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="22"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <ComboBox Width="120" Grid.Row="0" Grid.Column="0" Name="ComboBoxProject" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ComboBoxProject_SelectionChanged" Height="22"/>
+                <ComboBox Grid.Column="1" Grid.Row="0" Name="ComboBoxVersions" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxVersions_SelectionChanged" Height="22"/>
+                <ComboBox Grid.Column="2" Grid.Row="0" Name="ComboBoxBuilds">
+                    <ComboBox.Style>
+                        <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=CheckBoxManual}"
+                                             Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=CheckBoxManual}"
+                                             Value="False">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ComboBox.Style>
+                </ComboBox>
+                <Button Grid.Row="0" Margin="3,0" Grid.Column="3" Name="ButtonCreateServer" Content="Create" Click="ButtonCreateServer_Click"/>
+            </Grid>
+            <Label Grid.Column="0" Grid.Row="4" Content="Downloading:"/>
+            <ProgressBar Grid.Row="4" Grid.Column="1" Name="ProgressBarDownload"/>
+        </Grid>
         <Label Content="Downloaded:" HorizontalAlignment="Left" Margin="494,61,0,327" VerticalAlignment="Center" Height="31"/>
         <Label Content="No" HorizontalAlignment="Left" Margin="579,61,0,327" VerticalAlignment="Center" Height="31"/>
-        <CheckBox Name="CheckBoxManual" IsChecked="False" Content="Manual build" HorizontalAlignment="Left" Margin="369,115,0,0" VerticalAlignment="Top" Checked="CheckBoxIsLatest_OnChecked" Width="120"/>
-        <Button Name="ButtonCreateServer" Content="Create" HorizontalAlignment="Left" Margin="89,287,0,0" VerticalAlignment="Top" Width="75" Click="ButtonCreateServer_Click"/>
+        <Label Content="Downloading" HorizontalAlignment="Left" Margin="607,214,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

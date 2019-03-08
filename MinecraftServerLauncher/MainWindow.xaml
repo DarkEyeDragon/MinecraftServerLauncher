@@ -7,6 +7,111 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Name="ButtonCreateInstance" Content="Add instance" HorizontalAlignment="Left" Margin="305,178,0,0" VerticalAlignment="Top" Width="75" Click="ButtonCreateInstance_Click"/>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#F3664E" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="Foreground" Value="FloralWhite" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="Transparent">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FB8368" />
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#FF4E4E53" />
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="BorderBrush" Value="#FFFB2E00" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+            <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="Background" Value="#F3664E" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="MaxWidth" Value="120" />
+
+            </Style>
+            <Style TargetType="{x:Type TabControl}">
+                <Setter Property="Background" Value="#FF33333D" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="1120" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonTilePaper}">
+            <Grid Width="120">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="27" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Label FontSize="18" FontWeight="Medium" Grid.Row="0">Paper</Label>
+                <Label Grid.Row="1" Margin="0,-10,0,0">1.13.2</Label>
+                <Label Grid.Row="3">Online</Label>
+                <Label Grid.Row="4">0/20</Label>
+            </Grid>
+        </Button>
+        <Button Grid.Column="2" Grid.Row="0" Name="ButtonCreateInstance" FontSize="72"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                Click="ButtonCreateInstance_Click" AutomationProperties.HelpText="Create a new server instance">
+            <StackPanel Margin="5">
+                <Image Height="70" Margin="0,5">
+                    <Image.Source>
+                        <DrawingImage>
+                            <DrawingImage.Drawing>
+                                <DrawingGroup>
+                                    <DrawingGroup x:Name="DrawingLayer">
+                                        <DrawingGroup.ClipGeometry>
+                                            <RectangleGeometry Rect="0,0,500,500" />
+                                        </DrawingGroup.ClipGeometry>
+                                        <GeometryDrawing Brush="#FFFFFFFF">
+                                            <GeometryDrawing.Geometry>
+                                                <PathGeometry FillRule="Nonzero"
+                                                              Figures="M250,25A225.07,225.07,0,0,1,337.57,457.33A225.07,225.07,0,0,1,162.43,42.67A223.67,223.67,0,0,1,250,25 M250,5C114.69,5 5,114.69 5,250 5,385.31 114.69,495 250,495 385.31,495 495,385.31 495,250 495,114.69 385.31,5 250,5z" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                        <GeometryDrawing Brush="#FFFFFFFF">
+                                            <GeometryDrawing.Geometry>
+                                                <PathGeometry FillRule="Nonzero"
+                                                              Figures="M233.94,266.51L179.85,266.51 179.85,234.23 233.94,234.23 233.94,179.85 266.21,179.85 266.21,234.23 320.15,234.23 320.15,266.51 266.21,266.51 266.21,320.15 233.94,320.15z" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup>
+                                </DrawingGroup>
+                            </DrawingImage.Drawing>
+                        </DrawingImage>
+                    </Image.Source>
+                </Image>
+                <Label Content="Add Server" FontSize="18" Foreground="White" VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Center" />
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

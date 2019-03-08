@@ -26,6 +26,8 @@ namespace MinecraftServerLauncher.Windows
         public string Version { get; set; }
         public string Build { get; set; }
 
+        private readonly BackgroundWorker _worker = new BackgroundWorker();
+
         public NewInstance()
         {
             InitializeComponent();
@@ -34,6 +36,13 @@ namespace MinecraftServerLauncher.Windows
             ComboBoxProject.Items.Add(Project.Travertine);
             ComboBoxProject.SelectedItem = ComboBoxProject.Items[0];
             Build = "latest";
+            _worker.DoWork += Worker_DoWork;
+            //_worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -79,8 +88,22 @@ namespace MinecraftServerLauncher.Windows
             {
                 Build = "latest";
             }
+
+            Projects.DownloadChangeEvent += UpdateDownload;
+            Projects.DownloadCompleted += DownloadCompleted;
             Projects.DownloadJar(ProjectType, Version, Build);
             Debug.WriteLine($"{ProjectType}-{Version}_{Build}");
+        }
+
+        private void DownloadCompleted()
+        {
+            Projects.DownloadChangeEvent -= UpdateDownload;
+            Projects.DownloadCompleted -= DownloadCompleted;
+        }
+
+        private void UpdateDownload(int progress)
+        {
+            ProgressBarDownload.Value = progress;
         }
 
         private void PopulateVersion()

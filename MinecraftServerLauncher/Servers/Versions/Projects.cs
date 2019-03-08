@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace MinecraftServerLauncher.Servers.Versions
 
     class Projects
     {
+        public static byte ProgressPercent { get; set; }
+
         private static string _baseUrl = "https://papermc.io/api/v1/";
 
         public static string[] GetVersions(Project project)
@@ -57,8 +60,8 @@ namespace MinecraftServerLauncher.Servers.Versions
                         {
                             if (valuePair.Key.Equals("all"))
                             {
-                                JArray array = (JArray)valuePair.Value;
-                                return array.Select(jv => (string)jv).ToArray();
+                                JArray array = (JArray) valuePair.Value;
+                                return array.Select(jv => (string) jv).ToArray();
                             }
                         }
                     }
@@ -75,12 +78,27 @@ namespace MinecraftServerLauncher.Servers.Versions
                 wc.DownloadFileAsync(new Uri($"{_baseUrl}{project.ToString().ToLower()}/{version}/{build}/download"),
                     $"{project}-{version}_{build}.jar");
                 wc.DownloadProgressChanged += DownloadProgressChanged;
+                wc.DownloadFileCompleted += DownloadFileCompleted;
             }
         }
 
+
+        public delegate void DownloadChangeEventHandler(int progress);
+        public static event DownloadChangeEventHandler DownloadChangeEvent;
+
+        public delegate void DownloadCompletedHandler();
+        public static event DownloadCompletedHandler DownloadCompleted;
+
         private static void DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            Debug.WriteLine($"{e.BytesReceived}/{e.TotalBytesToReceive}");
+            DownloadChangeEvent?.Invoke(e.ProgressPercentage);
+            Debug.WriteLine($"{e.ProgressPercentage}%");
         }
+
+        private static void DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            DownloadCompleted?.Invoke();
+        }
+
     }
 }

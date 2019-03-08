@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="#ED5153" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="Transparent">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button"
+           BasedOn="{StaticResource {x:Type Button}}"
+           x:Key="ButtonTile">
+
+        <Setter Property="Background" Value="#0d68d9" />
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#0e76f5" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#FF4E4E53" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="BorderBrush" Value="#FFFB2E00" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Button"
+           BasedOn="{StaticResource ButtonTile}"
+           x:Key="ButtonTilePaper">
+        <Setter Property="Background">
+            <Setter.Value>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <DrawingGroup>
+                                <GeometryDrawing Brush="#D7515E">
+                                    <GeometryDrawing.Geometry>
+                                        <RectangleGeometry Rect="0,0,500,500"></RectangleGeometry>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                            <DrawingGroup>
+                                <DrawingGroup.ClipGeometry>
+                                    <RectangleGeometry Rect="0,0,500,500" />
+                                </DrawingGroup.ClipGeometry>
+                                <GeometryDrawing>
+                                    <GeometryDrawing.Brush>
+                                        <SolidColorBrush Color="#FFFFFFFF" Opacity="0.33" />
+                                    </GeometryDrawing.Brush>
+                                    <GeometryDrawing.Geometry>
+                                        <PathGeometry FillRule="Nonzero" Figures="M460.56,56.87L400.34,418.2A15.07,15.07,0,0,1,392.81,428.77A15.29,15.29,0,0,1,385.51,430.66A16.07,16.07,0,0,1,379.87,429.48L273.3,386 216.38,455.4A14.61,14.61,0,0,1,204.85,460.81A13.24,13.24,0,0,1,199.68,459.87A15,15,0,0,1,189.79,445.77L189.79,363.62 393,114.5 141.58,332.1 48.66,294A14.9,14.9,0,0,1,39.25,281.06A15.21,15.21,0,0,1,46.78,267.18L438.21,41.34A14.58,14.58,0,0,1,445.73,39.22A15,15,0,0,1,454.2,41.81A15.24,15.24,0,0,1,460.56,56.87z" />
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <DrawingBrush>
+                            <DrawingBrush.Drawing>
+                                <DrawingGroup>
+                                    <DrawingGroup>
+                                        <GeometryDrawing Brush="#C24652">
+                                            <GeometryDrawing.Geometry>
+                                                <RectangleGeometry Rect="0,0,500,500"></RectangleGeometry>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup>
+                                    <DrawingGroup>
+                                        <DrawingGroup.ClipGeometry>
+                                            <RectangleGeometry Rect="0,0,500,500" />
+                                        </DrawingGroup.ClipGeometry>
+                                        <GeometryDrawing>
+                                            <GeometryDrawing.Brush>
+                                                <SolidColorBrush Color="#FFFFFFFF" Opacity="0.25" />
+                                            </GeometryDrawing.Brush>
+                                            <GeometryDrawing.Geometry>
+                                                <PathGeometry FillRule="Nonzero" Figures="M460.56,56.87L400.34,418.2A15.07,15.07,0,0,1,392.81,428.77A15.29,15.29,0,0,1,385.51,430.66A16.07,16.07,0,0,1,379.87,429.48L273.3,386 216.38,455.4A14.61,14.61,0,0,1,204.85,460.81A13.24,13.24,0,0,1,199.68,459.87A15,15,0,0,1,189.79,445.77L189.79,363.62 393,114.5 141.58,332.1 48.66,294A14.9,14.9,0,0,1,39.25,281.06A15.21,15.21,0,0,1,46.78,267.18L438.21,41.34A14.58,14.58,0,0,1,445.73,39.22A15,15,0,0,1,454.2,41.81A15.24,15.24,0,0,1,460.56,56.87z" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup>
+                                </DrawingGroup>
+                            </DrawingBrush.Drawing>
+                        </DrawingBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Cursor" Value="Hand"></Setter>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#FF4E4E53" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="BorderBrush" Value="#FFFB2E00" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
