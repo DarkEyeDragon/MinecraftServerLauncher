@@ -4,12 +4,14 @@
              xmlns:local="clr-namespace:MinecraftServerLauncher"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         <ResourceDictionary>
-             <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="ResourceDictionaries/Buttons.xaml"/>
-                    <ResourceDictionary Source="ResourceDictionaries/DropDown.xaml"/>
-                    <ResourceDictionary Source="ResourceDictionaries/Grid.xaml"/>
-             </ResourceDictionary.MergedDictionaries>
-         </ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionaries/Progressbar.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Window.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Buttons.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/DropDown.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Grid.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

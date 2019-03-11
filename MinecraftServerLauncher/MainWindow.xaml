@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:MinecraftServerLauncher"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="1,1" StartPoint="0.5,0">
+            <GradientStop Color="#B031F2" Offset="0"/>
+            <GradientStop Color="#671CF2" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">
@@ -51,7 +57,7 @@
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="50" />
             <ColumnDefinition Width="120" />
             <ColumnDefinition Width="120" />
             <ColumnDefinition Width="120" />
@@ -113,5 +119,6 @@
                        HorizontalContentAlignment="Center" />
             </StackPanel>
         </Button>
+        <Button Style="{StaticResource ButtonSettings}" Content="" Grid.Column="4" HorizontalAlignment="Left" Margin="121,55,-40,0" VerticalAlignment="Top" Grid.Row="1"/>
     </Grid>
 </Window>

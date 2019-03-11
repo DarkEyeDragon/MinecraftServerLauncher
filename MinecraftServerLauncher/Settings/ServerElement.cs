@@ -10,7 +10,6 @@ namespace MinecraftServerLauncher.Settings
 {
     class ServerElement
     {
-
         public Project ProjectType { get; set; }
         public string ServerName { get; set; }
         public string Version { get; set; }
@@ -18,6 +17,13 @@ namespace MinecraftServerLauncher.Settings
         public string Path { get; set; }
         public string JarName { get; set; }
         public Arguments Args { get; set; }
+
+        /// <summary>
+        /// Create a new ServerElement instance.
+        /// </summary>
+        public ServerElement()
+        {
+        }
 
 
         /// <summary>
@@ -30,7 +36,8 @@ namespace MinecraftServerLauncher.Settings
         /// <param name="path">the relative path of the working directory</param>
         /// <param name="jarName">The name of the jar (without extension)</param>
         /// <param name="args">Java arguments of type <see cref="Arguments"/></param>
-        public ServerElement(Project projectType, string serverName, string version, string build, string path, string jarName, Arguments args)
+        public ServerElement(Project projectType, string serverName, string version, string build, string path,
+            string jarName, Arguments args)
         {
             ProjectType = projectType;
             ServerName = serverName;

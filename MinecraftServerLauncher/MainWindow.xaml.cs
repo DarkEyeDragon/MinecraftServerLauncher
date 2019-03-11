@@ -40,5 +40,10 @@ namespace MinecraftServerLauncher
 
             NewInstance.Visibility = Visibility.Visible;
         }
+
+        private void PopulateServers()
+        {
+            ServerElement element = new ServerElement();
+        }
     }
 }

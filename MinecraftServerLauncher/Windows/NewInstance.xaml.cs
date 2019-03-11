@@ -86,16 +86,9 @@ namespace MinecraftServerLauncher.Windows
 
             Projects.DownloadChangeEvent += UpdateDownload;
             Projects.DownloadCompleted += DownloadCompleted;
-            //Projects.DownloadJar(ProjectType, Version, Build);
+            Projects.DownloadJar(ProjectType, Version, Build);
 
-            //TODO implement a path system
-            var args = new Arguments();
-            args.Add("xmx", "1024M");
-            args.Add("xms", "1024M");
-            ServerElement element = new ServerElement(ProjectType, TextBoxServerName.Text, Version, Build, "", $"{ProjectType}-{Version}_{Build}", args);
-
-            var settings = new SettingsHandler();
-            settings.Save(element);
+            
 
             Debug.WriteLine($"{ProjectType}-{Version}_{Build}");
         }
@@ -107,6 +100,15 @@ namespace MinecraftServerLauncher.Windows
             var result = MessageBox.Show("Do you want to start the server now?", "Start server",
                 MessageBoxButton.YesNo, MessageBoxImage.Question);
             ProgressBarDownload.Value = 0;
+
+
+            //TODO implement a path system
+            var args = new Arguments { { "xmx", "1024M" }, { "xms", "1024M" } };
+            ServerElement element = new ServerElement(ProjectType, TextBoxServerName.Text, Version, Build, "", $"{ProjectType}-{Version}_{Build}", args);
+
+            var settings = new SettingsHandler();
+            settings.Save(element);
+
             if (result == MessageBoxResult.Yes)
             {
                 //TODO launch server

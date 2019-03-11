@@ -6,40 +6,48 @@
         xmlns:local="clr-namespace:MinecraftServerLauncher.Windows"
         mc:Ignorable="d"
         Title="NewInstance" Height="450" Width="800"
-        Closing="NewInstance_OnClosing">
+        Closing="NewInstance_OnClosing"
+        Background="#C54566">
     <Grid>
         <Grid Style="{StaticResource GridContainer}">
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Foreground" Value="White"></Setter>
+                </Style>
+                <Style TargetType="CheckBox">
+                    <Setter Property="Foreground" Value="White"></Setter>
+                </Style>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="85" />
                 <ColumnDefinition Width="240" />
-                <ColumnDefinition Width="206" />
-                <ColumnDefinition Width="227" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="333" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="87*" MaxHeight="100" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="150*" MaxHeight="150" />
-                <RowDefinition Height="80*" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="75*" MaxHeight="150" />
+                <RowDefinition Height="19*" />
+                <RowDefinition Height="73" />
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Content="Server name"/>
-            <TextBox Name="TextBoxServerName" Grid.Column="1" Grid.Row="1" Margin="3" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="Server1"/>
-            <CheckBox Grid.Column="2" Grid.Row="1" Margin="3,0,0,0" Name="CheckBoxManual" IsChecked="False" Content="Manual build" VerticalContentAlignment="Center" HorizontalAlignment="Left" Checked="CheckBoxIsLatest_OnChecked" Width="89"/>
-            <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+            <Label Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center" Content="Server name"/>
+            <TextBox Name="TextBoxServerName" Grid.Column="0" Grid.Row="1" Margin="3,8" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="Server1"/>
+            <CheckBox Grid.Column="1" Grid.Row="1" Margin="3,0,0,0" Name="CheckBoxManual" IsChecked="False" Content="Manual build" VerticalContentAlignment="Center" HorizontalAlignment="Center" Checked="CheckBoxIsLatest_OnChecked" Width="89"/>
+            <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100*"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="0*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="22"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="77"/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <ComboBox Width="120" Grid.Row="0" Grid.Column="0" Name="ComboBoxProject" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ComboBoxProject_SelectionChanged" Height="22"/>
-                <ComboBox Grid.Column="1" Grid.Row="0" Name="ComboBoxVersions" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxVersions_SelectionChanged" Height="22"/>
+                <ComboBox Width="120" Grid.Row="0" Grid.Column="0" Name="ComboBoxProject" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="ComboBoxProject_SelectionChanged" Height="22" Margin="0,5,1,5"/>
+                <ComboBox Grid.Column="1" Grid.Row="0" Name="ComboBoxVersions" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" SelectionChanged="ComboBoxVersions_SelectionChanged" Height="22" Margin="1,5,0,5"/>
                 <ComboBox Grid.Column="2" Grid.Row="0" Name="ComboBoxBuilds">
                     <ComboBox.Style>
                         <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
@@ -56,13 +64,10 @@
                         </Style>
                     </ComboBox.Style>
                 </ComboBox>
-                <Button Grid.Row="0" Margin="3,0" Grid.Column="3" Name="ButtonCreateServer" Content="Create" Click="ButtonCreateServer_Click"/>
+                <Button Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="0" Margin="3, 10" Name="ButtonCreateServer" Click="ButtonCreateServer_Click">
+                    <ProgressBar Style="{StaticResource ProgressbarFlat}" Margin="0,-0.75" Name="ProgressBarDownload"/>
+                </Button>
             </Grid>
-            <Label Grid.Column="0" Grid.Row="4" Content="Downloading:"/>
-            <ProgressBar Grid.Row="4" Grid.Column="1" Name="ProgressBarDownload"/>
         </Grid>
-        <Label Content="Downloaded:" HorizontalAlignment="Left" Margin="494,61,0,327" VerticalAlignment="Center" Height="31"/>
-        <Label Content="No" HorizontalAlignment="Left" Margin="579,61,0,327" VerticalAlignment="Center" Height="31"/>
-        <Label Content="Downloading" HorizontalAlignment="Left" Margin="607,214,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
